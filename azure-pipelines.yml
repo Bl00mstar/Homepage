@@ -6,6 +6,8 @@
 trigger:
 - master
 
+variables:
+  azureSubscription: 'c1d83fd1-3b7c-4211-a51b-c6125e66e2a6'
 pool:
   vmImage: ubuntu-latest
 
@@ -29,3 +31,10 @@ steps:
   inputs: 
     PathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
     ArtifactName: 'www'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: $(azureSubscription)
+    appType: 'webAppLinux'
+    appName: 'webdeveloperkanaotherone'
+    package: $(Build.ArtifactStagingDirectory)/www/*.zip
