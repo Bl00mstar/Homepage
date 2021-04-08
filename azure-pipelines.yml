@@ -9,7 +9,7 @@ trigger:
 
 variables:
 - group: variables
-- name: azsu-d-kv-value-002
+- name: svc-acc-01
   value: $[variables.azsu-d-kv-value-002] # uses runtime expression
 
 steps:
