@@ -10,7 +10,7 @@ trigger:
 variables:
 - group: variables
 - name: azsu-d-kv-value-002
-  value: $[variables.svc-acc-01] # uses runtime expression
+  value: $[variables.azsu-d-kv-value-002] # uses runtime expression
 
 steps:
 - script: echo $(svc-acc-01) # uses macro syntax
