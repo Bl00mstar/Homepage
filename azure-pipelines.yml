@@ -11,7 +11,7 @@ variables:
 
 steps:
   - script: |
-      echo ${{svc-acc-01}}
+      echo $(svc-acc-01)
 
 # variables:
 # - name: one
