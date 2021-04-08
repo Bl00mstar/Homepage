@@ -1,40 +1,30 @@
-# Node.js with React
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
-trigger:
-- master
-
 variables:
-  - group: azure-demos-config
+ -group: reactApp
 
 steps:
-  - script: |
-      echo $(svc-acc-01)
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
 
-# variables:
-# - name: one
-#   value: initialValue 
-# steps:
-#   - script: |
-#       echo ${{ variables.one }} # outputs initialValue
-#       echo $(one)
-#     displayName: First variable pass
-#   - bash: echo '##vso[task.setvariable variable=one]secondValue'
-#     displayName: Set new variable value
-#   - script: |
-#       echo ${{ variables.one }} # outputs initialValue
-#       echo $(one) # outputs secondValue
-#     displayName: Second variable pass
-# variables:
-# - group: variables
-# - name: svc-acc-01
-#   value: 'asd'
-#   # value: $[variables.svc-acc-01] # uses runtime expression
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
 
-# steps:
-# - script: echo $(svc-acc-01)
-# - script: echo $(asd)
-# - script: echo $(variables)
-# - script: echo $(azsu-d-kv-value-002)
+- task: CopyFiles@2
+  inputs:
+    Contents: 'build/**' # Pull the build directory (React)
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs: 
+    PathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
+    ArtifactName: 'www'
+    
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: $(azpassword)
+    appType: 'webAppLinux'
+    appName: 'R3act4pp'
+    package: $(Build.ArtifactStagingDirectory)/www/*.zip
