@@ -15,4 +15,5 @@ variables:
 
 steps:
 - script: echo $(svc-acc-01) # uses macro syntax
+- script: echo $(asd)
 # - script: echo $(azsu-d-kv-value-002)
