@@ -24,7 +24,7 @@ steps:
     
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: $(azpassword)
+    azureSubscription: $(reactApp.azpassword)
     appType: 'webAppLinux'
     appName: 'R3act4pp'
     package: $(Build.ArtifactStagingDirectory)/www/*.zip
