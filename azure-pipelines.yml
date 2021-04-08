@@ -7,12 +7,11 @@ trigger:
 - master
 
 
-pool:
-  vmImage: ubuntu-latest
+variables:
+- group: variables
+- name: azsu-d-kv-value-002
+  value: $[variables.svc-acc-01] # uses runtime expression
 
 steps:
-- bash: |
-   # Print all the available env vars.
-
-   env
-  displayName: env
+- script: echo $(svc-acc-01) # uses macro syntax
+- script: echo $(azsu-d-kv-value-002)
