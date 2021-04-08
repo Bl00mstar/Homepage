@@ -10,7 +10,8 @@ trigger:
 variables:
 - group: variables
 - name: svc-acc-01
-  value: $[variables.svc-acc-01] # uses runtime expression
+  value: 'asd'
+  # value: $[variables.svc-acc-01] # uses runtime expression
 
 steps:
 - script: echo $(svc-acc-01) # uses macro syntax
