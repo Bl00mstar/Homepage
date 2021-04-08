@@ -7,12 +7,11 @@ trigger:
 - master
 
 variables:
-- group: variables
-- name: azsu-d-kv-value-002
+  - group: azure-demos-config
 
 steps:
   - script: |
-      echo ${{variables.svc-acc-01}}
+      echo ${{svc-acc-01}}
 
 # variables:
 # - name: one
