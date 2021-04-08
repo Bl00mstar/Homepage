@@ -8,7 +8,7 @@ trigger:
 
 variables:
 - group: variables
-- name: svc-acc-01
+- name: azsu-d-kv-value-002
 
 steps:
   - script: |
